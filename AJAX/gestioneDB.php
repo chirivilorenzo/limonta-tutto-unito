@@ -8,17 +8,17 @@ class gestioneDB
      */
     public function __construct()
     {
-        $this->mysqli = new mysqli("localhost", "root", "", "progetto");
+        $this->mysqli = new mysqli("localhost", "root", "", "limonta");
     }
-    public function getTicketCliente($codiceCliente) {
+    public function getTicketCliente($IDcliente) {
         // Query per recuperare i ticket del cliente corrente
-        $query = "SELECT * FROM aperturaticket WHERE codiceCliente = ?";
+        $query = "SELECT * FROM aperturaticket WHERE IDcliente = ?";
         
         // Preparazione dello statement
         $stmt = $this->mysqli->prepare($query);
         
         // Vincola il parametro
-        $stmt->bind_param("i", $codiceCliente); // "i" indica che $codiceCliente è un intero
+        $stmt->bind_param("i", $IDcliente); // "i" indica che $IDcliente è un intero
         
         // Esecuzione dello statement
         $stmt->execute();
@@ -30,13 +30,15 @@ class gestioneDB
         
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $ticketsHTML .= "<div>";
-                $ticketsHTML .= "<h3>{$row['breveDescrizione']}</h3>";
-                $ticketsHTML .= "<p>{$row['descrizione']}</p>";
-                $ticketID = $row['ID'];
-                $ticketsHTML .= "<button class='btn btn-warning' onclick='sospendiTicket($ticketID)'>Sospendi</button>";
-                $ticketsHTML .= "<button class='btn btn-danger' onclick='chiudiTicket($ticketID)'>Chiudi</button>";
-                $ticketsHTML .= "</div>";
+                if($row['stato'] != "chiuso"){
+                    $ticketsHTML .= "<div>";
+                    $ticketsHTML .= "<h3>{$row['breveDescrizione']}</h3>";
+                    $ticketsHTML .= "<p>{$row['descrizione']}</p>";
+                    $ticketID = $row['ID'];
+                    $ticketsHTML .= "<button class='btn btn-warning' onclick='sospendiTicket($ticketID)'>Sospendi</button>";
+                    $ticketsHTML .= "<button class='btn btn-danger' onclick='chiudiTicket($ticketID)'>Chiudi</button>";
+                    $ticketsHTML .= "</div>";                    
+                }
             }
         } else {
             $ticketsHTML = "Nessun ticket trovato.";

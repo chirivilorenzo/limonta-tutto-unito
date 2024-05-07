@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" href="../CSS/style_inserisciCliente.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../js/logout.js">
         <script>
 
             $("document").ready(function(){
@@ -11,20 +12,11 @@
                 });
 
                 $("#logout").click(function(){
-                    logout();
+                    esciCliente();
                 });
 
                 controllaAutenticato();
             });
-
-
-            function logout(){
-                $.get("../AJAX/logout.php", {}, function(response){
-                    alert("logout effettuato");
-                    window.location.href = "loginCliente.php";
-                });
-            }
-
 
             function controllaAutenticato(){
                 $.post("../AJAX/checkAutenticato.php", {}, function(response){

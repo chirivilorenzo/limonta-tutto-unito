@@ -15,7 +15,7 @@
 
                 $.post("../AJAX/loginCliente.php", {username: user, password: psw}, function(response){
                     if(response["status"] == "200"){
-                        window.location.href = "inserisciCliente.php";
+                        window.location.href = "visualizzaTuttoCliente.php";
                     }
                     else{
                         alert(response["status"] + ": " + response["message"]);
