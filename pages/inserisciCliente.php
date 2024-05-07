@@ -2,11 +2,9 @@
     <head>
         <link rel="stylesheet" href="../CSS/style_inserisciCliente.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="../js/logout.js">
+        <script src="../js/logout.js"></script>
         <script>
-
             $("document").ready(function(){
-
                 $("#invia").click(function(){
                     inviaTicket();
                 });
