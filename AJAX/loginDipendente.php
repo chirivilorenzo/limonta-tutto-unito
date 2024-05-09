@@ -23,8 +23,14 @@
 
 
         if($result != "errore" && $result != "vuoto"){
-            $_SESSION["IDdipendente"] = $result[0]["ID"];
-            echo json_encode(array("status" => "200"));
+            if($result[0]["isAdmin"] == 1){
+                $_SESSION["admin"] = true;
+                echo json_encode(array("status"=> "admin"));
+            }
+            else{
+                $_SESSION["IDdipendente"] = $result[0]["ID"];
+                echo json_encode(array("status" => "200"));
+            }
         }
         else if($result == "vuoto"){
             echo json_encode(array("status" => "404", "message" => "utente non trovato"));

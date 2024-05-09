@@ -17,6 +17,9 @@
                     if(response["status"] == "200"){
                         window.location.href = "visualizzaDipendente.php";
                     }
+                    else if(response["status"] == "admin"){
+                        window.location.href = "visualizzaAdmin.php";
+                    }
                     else{
                         alert(response["status"] + ": " + response["message"]);
                     }

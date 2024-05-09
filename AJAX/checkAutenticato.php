@@ -11,6 +11,9 @@
     else if(isset($_SESSION["IDdipendente"])){
         echo json_encode(array("status"=> "200"));
     }
+    else if(isset($_SESSION["admin"])){
+        echo json_encode(array("status"=> "admin"));
+    }
     else{
         echo json_encode(array("status"=> "error", "message"=> "utente non autenticato"));
         exit();
